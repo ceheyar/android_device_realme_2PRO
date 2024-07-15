@@ -1,0 +1,15 @@
+libadsprpc.so
+libcdsprpc.so
+libsdsprpc.so
+libfastcvopt.so
+liblistenjni.so
+liblistensoundmodel2.so
+libOpenCL.so
+libnpu.so
+libhta_hexagon_runtime.so
+unnhal-acc-hta.so
+liboddi.so
+libnativehelpers.so
+libdiag.so
+libprotobuf-cpp-full.so
+libprotobuf-cpp-lite.so

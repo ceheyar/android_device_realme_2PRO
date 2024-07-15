@@ -1,0 +1,32 @@
+on boot
+    mkdir /data/opponvitems  0771 radio radio
+    mkdir /persist/camera 0777 system system
+    write /proc/sys/fs/suid_dumpable 1
+    setprop persist.vendor.radio.force_on_dc true
+    mkdir /persist/media 0775 media media
+
+    # Add for limit_enable
+    chown system system /proc/touchpanel/oppo_tp_limit_enable
+    chown system system /proc/touchpanel/oppo_tp_limit_area
+    chown system system /proc/touchpanel/oppo_tp_direction
+    chown system system /proc/touchpanel/oppo_tp_limit_whitelist
+    chown system system /proc/touchpanel/tp_fw_update
+
+    # Add for touchscreen firmware update check
+    write /proc/touchpanel/tp_fw_update 1
+
+    # Disable edge limit control interface
+    write /proc/touchpanel/oppo_tp_limit_enable 0
+
+    # Enable oppo's touchpanel direction
+    write /proc/touchpanel/oppo_tp_direction 1
+
+    # Set oppo camera package name to com.oppo.camera to trick camera hal
+    setprop oppo.camera.packname com.oppo.camera
+
+# Add for oppoalgo_daemon
+service oppoalgo /vendor/bin/oppoalgo_daemon
+    class main
+    user media
+    ioprio rt 4
+    group camera input drmrpc sdcard_rw system
